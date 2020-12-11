@@ -454,7 +454,6 @@ const styles = StyleSheet.create({
   discountItemContainer: {
     flexDirection: 'column',
     flex: 0.5,
-    backgroundColor: 'red',
   },
   discountItemImage: {
     width: '100%',
