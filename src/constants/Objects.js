@@ -50,7 +50,7 @@ const discount = [
   },
 ]
 
-const keepDiscovering = Array.apply(null, Array(10)).map((v, i) => {
+const keepDiscovering = Array.apply(null, Array(11)).map((v, i) => {
   return {
     title: `Lorem ipsum dolt, consectetur adipiscing elit ${i}`,
     content: `Until ${i} dec`,

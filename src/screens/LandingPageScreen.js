@@ -11,12 +11,12 @@ import {
   Image,
   Animated,
   SafeAreaView,
-  Platform
+  Platform,
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {discount, keepDiscovering, menuData} from '../constants/Objects';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {CommonActions} from '@react-navigation/native';
 import {getStatusBarHeight} from 'react-native-status-bar-height';
 
@@ -33,6 +33,15 @@ const LandingPageScreen = ({navigation}) => {
   });
 
   const [bottomTabOffset, setBottomTabOffset] = useState(0);
+
+  const clickSearchBar = () => {
+    Alert.alert(
+      'Search function is still in development',
+      ``,
+      [{text: 'OK', onPress: () => {}}],
+      {cancelable: false},
+    );
+  };
 
   const onScrollHandler = (e) => {
     const currentbottomTabOffset = e.nativeEvent.contentOffset.y;
@@ -96,20 +105,30 @@ const LandingPageScreen = ({navigation}) => {
       <TouchableOpacity
         style={styles.discountItemContainer}
         onPress={() => clickDiscountItem(item)}>
-        <View
-          style={[
-            styles.discountItemImage,
-            {
-              backgroundColor: color,
-            },
-          ]}
-        />
-        <View style={{flexDirection: 'column', marginTop: 10}}>
-          <Text style={{fontWeight: '600'}}>{title}</Text>
+        <View style={{padding: 10}}>
           <View
-            style={{flexDirection: 'row', marginTop: 4, alignItems: 'center'}}>
-            <Ionicons name="calendar" size={16} color="grey" />
-            <Text style={{fontSize: 14, marginLeft: 4}}>{content}</Text>
+            style={[
+              styles.discountItemImage,
+              {
+                backgroundColor: color,
+              },
+            ]}
+          />
+          <View
+            style={{
+              flexDirection: 'column',
+              marginTop: 10,
+            }}>
+            <Text style={{fontWeight: '600'}}>{title}</Text>
+            <View
+              style={{
+                flexDirection: 'row',
+                marginTop: 4,
+                alignItems: 'center',
+              }}>
+              <Ionicons name="calendar" size={16} color="grey" />
+              <Text style={{fontSize: 14, marginLeft: 4}}>{content}</Text>
+            </View>
           </View>
         </View>
       </TouchableOpacity>
@@ -123,7 +142,7 @@ const LandingPageScreen = ({navigation}) => {
           position: 'absolute',
           top: Platform.OS !== 'ios' ? -getStatusBarHeight() : 0, //for android
           width: '100%',
-          height: getStatusBarHeight(), 
+          height: getStatusBarHeight(),
           backgroundColor: barColor,
           // overflow: 'hidden',
         }}
@@ -149,7 +168,9 @@ const LandingPageScreen = ({navigation}) => {
               <Ionicons name="scan" size={30} color="black" />
               {/* </View> */}
             </TouchableOpacity>
-            <TouchableOpacity style={styles.searchBarContainer}>
+            <TouchableOpacity
+              style={styles.searchBarContainer}
+              onPress={() => clickSearchBar()}>
               <Ionicons
                 name="search"
                 size={20}
@@ -257,11 +278,16 @@ const LandingPageScreen = ({navigation}) => {
                 style={{marginHorizontal: 10}}
                 renderItem={({item}) => renderDiscountItem(item)}
                 ListFooterComponent={() => {
-                  return(
-                    <View style={{height: 50, alignItems: 'center', justifyContent: 'center'}}>
+                  return (
+                    <View
+                      style={{
+                        height: 50,
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                      }}>
                       <Text>That's all for now</Text>
-                      </View>
-                  )
+                    </View>
+                  );
                 }}
                 //Setting the number of column
                 numColumns={2}
@@ -427,8 +453,8 @@ const styles = StyleSheet.create({
   },
   discountItemContainer: {
     flexDirection: 'column',
-    flex: 1,
-    margin: 10,
+    flex: 0.5,
+    backgroundColor: 'red',
   },
   discountItemImage: {
     width: '100%',
